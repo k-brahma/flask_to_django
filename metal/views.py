@@ -1,6 +1,7 @@
 import json
 
 from django.contrib import messages
+from django.core.exceptions import SuspiciousOperation
 from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, resolve_url
@@ -76,6 +77,10 @@ class MetalBuy(View):
         metal_name = request.POST['metal_name']
         metal = Metal.objects.get(name=metal_name)
         weight = request.POST['weight']
+        # if not weight.isnumeric():
+        #     messages.warning(request, 'weightは数値にしてね！')
+        #     return self.get(request, *args, **kwargs)
+
         email = request.POST['email']
         name = request.POST['name']
 
