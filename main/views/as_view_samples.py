@@ -2,22 +2,22 @@ from django.http import HttpResponse
 from django.views.generic import View, TemplateView
 
 
-class SampleClass21(View):
+class SampleClass31(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse('<h1>SampleClass21に呼ばれました！</h1>')
 
 
-func_21 = SampleClass21.as_view()
+func_31 = SampleClass31.as_view()
 
 
-class SampleClass22(TemplateView):
+class SampleClass32(TemplateView):
     template_name = "sample_without_context.html"
 
 
-func_22 = SampleClass22.as_view()
+func_32 = SampleClass32.as_view()
 
 
-class SampleClass23(TemplateView):
+class SampleClass33(TemplateView):
     template_name = "sample_with_context.html"
 
     def get_context_data(self, **kwargs):
@@ -26,4 +26,4 @@ class SampleClass23(TemplateView):
         return context
 
 
-func_23 = SampleClass23.as_view()
+func_33 = SampleClass33.as_view()
