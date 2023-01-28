@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        .ul-flex {
+            display: flex;
+        }
+
+        .company_name {
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .buy {
+            width: 100px;
+            text-align: center;
+        }
+
+        .sell {
+            width: 100px;
+            text-align: center;
+        }
+
+        .detail {
+            width: 200px;
+            text-align: center;
+        }
+
+        .label {
+            text-align: center;
+        }
+
+        p.links {
+            border-top: 1px solid black;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+    </style>
+    <title>class_views/ItemListView1 からようこそ！</title>
+</head>
+<body>
+<h1>class_views/ItemListView1 からようこそ！</h1>
+<section class="section">
+    <p>
+        あなたがこのページを表示できているのは、 class_views/ItemListView1 で <code>model = Stock</code> と記載されていたからです。<br>
+        ListView は、 model が指定されていて、かつ template_name が明示されていない場合は、<br>
+        <code>app_name/model_name_list.html</code> というテンプレートを探します。<br>
+    </p>
+    <ul>
+        <li id="title">
+            <ul class="ul-flex">
+                <li class="company_name label">会社コード:</li>
+                <li class="buy label">買い取り</li>
+                <li class="sell label">販売</li>
+                <li class="detail label">詳細ページへのリンク</li>
+            </ul>
+        </li>
+        {% for object in object_list %}
+            <li id="{{ object.name }}">
+                <ul class="ul-flex">
+                    <li class="company_name">{{ object.name }}:</li>
+                    <li class="buy">{{ object.buy }}円</li>
+                    <li class="sell">{{ object.sell }}円</li>
+                    <li class="detail"><a href="{% url 'stock:detail' pk=object.pk %}">リンク</a></li>
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+</body>
+</html>

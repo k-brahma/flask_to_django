@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class_views/ItemDetail1 からようこそ！</title>
+</head>
+<body>
+<h1>class_views/ItemDetail1 からようこそ！</h1>
+<section class="section">
+    <p>
+        あなたがこのページを表示できているのは、 class_views/ItemDetail1 で <code>model = Stock</code> と記載されていたからです。<br>
+        ListView は、 model が指定されていて、かつ template_name が明示されていない場合は、<br>
+        <code>app_name/model_name_list.html</code> というテンプレートを探します。<br>
+    </p>
+    <div class="company_name">会社コード: {{ object.name }}</div>
+    <div class="buy">買い取り: {{ object.buy }}円</div>
+    <div class="sell">販売: {{ object.sell }}円</div>
+    <div class="detail">詳細ページへのリンク: <a href="{% url 'stock:detail' pk=object.pk %}">リンク</a></div>
+</section>
+</body>
+</html>

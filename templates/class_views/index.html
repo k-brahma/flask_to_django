@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index view</title>
+    <style>
+        .link-area {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .link-area p {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #ccc;
+        }
+    </style>
+</head>
+<body>
+<p>
+    class_views/index.html が呼び出されました。
+</p>
+<div class="link-area">
+    <p>
+        ccbv:
+        <a href="https://ccbv.co.uk/" target="_blank">https://ccbv.co.uk/</a>
+    </p>
+    <p>
+        template views:<br>
+        <a href="{% url 'class:top' %}">top</a><br>
+        <a href="{% url 'class:index' %}">index</a><br>
+        <a href="{% url 'class:with_context' %}">with_context</a><br>
+        <a href="{% url 'class:get_template_names1' %}">get_template_names1</a><br>
+        <a href="{% url 'class:get_template_names2' %}">get_template_names2</a><br>
+        <a href="{% url 'class:authed' %}">authed</a><br>
+        <a href="{% url 'class:anonymous' %}">anonymous</a><br>
+    </p>
+    <p>
+        redirect views:<br>
+        <a href="{% url 'class:r1' %}">redirect1</a><br>
+        <a href="{% url 'class:r2' %}">redirect2</a><br>
+        <a href="{% url 'class:r3' %}">redirect3</a><br>
+    </p>
+    <p>
+        list views:<br>
+        <a href="{% url 'class:list1' %}">list1</a><br>
+        <a href="{% url 'class:list2' %}">list2</a><br>
+        <a href="{% url 'class:list3' %}">list3</a><br>
+    </p>
+    <p>
+        detail views 1:<br>
+        <a href="{% url 'class:detail1' 1 %}">detail1 pk1</a><br>
+        <a href="{% url 'class:detail1' 2 %}">detail1 pk2</a><br>
+        <a href="{% url 'class:detail1' 3 %}">detail1 pk3</a><br>
+        <a href="{% url 'class:detail1' 4 %}">detail1 pk4</a><br>
+        <a href="{% url 'class:detail1' 5 %}">detail1 pk5</a><br>
+    </p>
+    <p>
+        detail views 2:<br>
+        <a href="{% url 'class:detail2' 1 %}">detail2 pk1</a><br>
+        <a href="{% url 'class:detail2' 2 %}">detail2 pk2</a><br>
+        <a href="{% url 'class:detail2' 3 %}">detail2 pk3</a><br>
+        <a href="{% url 'class:detail2' 4 %}">detail2 pk4</a><br>
+        <a href="{% url 'class:detail2' 5 %}">detail2 pk5</a><br>
+    </p>
+    <p>
+        detail views 3:<br>
+        <a href="{% url 'class:detail3' 1 %}">detail3 pk1</a><br>
+        <a href="{% url 'class:detail3' 2 %}">detail3 pk2</a><br>
+        <a href="{% url 'class:detail3' 3 %}">detail3 pk3</a><br>
+        <a href="{% url 'class:detail3' 4 %}">detail3 pk4</a><br>
+        <a href="{% url 'class:detail3' 5 %}">detail3 pk5</a><br>
+    </p>
+    <p>
+        detail views 4:<br>
+        <a href="{% url 'class:detail4' 1 %}">detail4 pk1</a><br>
+        <a href="{% url 'class:detail4' 2 %}">detail4 pk2</a><br>
+        <a href="{% url 'class:detail4' 3 %}">detail4 pk3</a><br>
+        <a href="{% url 'class:detail4' 4 %}">detail4 pk4</a><br>
+        <a href="{% url 'class:detail4' 5 %}">detail4 pk5</a><br>
+    </p>
+</div>
+</body>
+</html>

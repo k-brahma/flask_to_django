@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import resolve_url
 from django.urls import path
 
-from .views import base_views, sample_views, as_view_samples, class_based_views, error_views
+from main.views import base_views, sample_views, class_based_views, as_view_samples, error_views
 
 
 def sample01_func(request):
@@ -11,6 +11,10 @@ def sample01_func(request):
     views.py にある必要はない
     view 関数は、第一引数に request を取る。そして、 HttpResponse オブジェクトを返す。
     """
+    # if request.user.is_anonymous:
+    #     return HttpResponse('sample01_func はログインしていないと見れません。')
+    # else:
+    #     return HttpResponse('sample01_func はログインしていると見れます。')
     return HttpResponse('<h1>sample1_funcに呼ばれました！</h1>')
 
 

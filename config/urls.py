@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('main.urls')),
+    path('class/', include('class_views.urls')),
     path('metal/', include('metal.urls')),
     path('stock/', include('stock.urls')),
 ]
