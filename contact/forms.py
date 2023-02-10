@@ -1,4 +1,4 @@
-from django.forms import forms, IntegerField, EmailField, Textarea, CharField, DateTimeField, BooleanField
+from django.forms import forms, IntegerField, EmailField, Textarea, CharField, DateTimeField, BooleanField, FileField
 from django.utils import timezone
 
 
@@ -29,3 +29,10 @@ class ContactForm(forms.Form):
         if is_claim and not email:
             raise forms.ValidationError('クレームの場合はメールアドレスを入力してください。')
         return cleaned_data
+
+
+class FileForm(forms.Form):
+    file = FileField(label='ファイル', help_text='ファイルを選択してください。')
+    name = CharField(label='お名前', max_length=10, help_text='10文字以内で入力してください。')
+    email = EmailField(label='メールアドレス', help_text='必須です', )
+    reason = CharField(label='投稿した理由', help_text='理由を入力してください。')

@@ -14,4 +14,5 @@ urlpatterns = [
     path('post/', views.ContactFormWithPost.as_view(), name='post'),
     path('method/', views.ContactFormWithPostMethod.as_view(), name='method'),
     path('form_view/', views.ContactFormView.as_view(), name='form_view'),
+    path('file/', views.FileFormView.as_view(), name='file'),
 ]
