@@ -1,0 +1,27 @@
+{% extends "contact/base.html" %}
+{% block content %}
+<p>
+    <a href="{% url 'contact:as_div' %}">as_div</a>
+</p>
+<p>
+    <a href="{% url 'contact:as_p' %}">as_p</a>
+</p>
+<p>
+    <a href="{% url 'contact:as_table' %}">as_table</a>
+</p>
+<p>
+    <a href="{% url 'contact:as_ul' %}">as_ul</a>
+</p>
+<p>
+    <a href="{% url 'contact:with_data' %}">with_data</a>
+</p>
+<p>
+    <a href="{% url 'contact:post' %}">post</a>
+</p>
+<p>
+    <a href="{% url 'contact:method' %}">method</a>
+</p>
+<p>
+    <a href="{% url 'contact:form_view' %}">form view</a>
+</p>
+{% endblock %}

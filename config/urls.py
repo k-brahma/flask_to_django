@@ -23,4 +23,5 @@ urlpatterns = [
     path('class/', include('class_views.urls')),
     path('metal/', include('metal.urls')),
     path('stock/', include('stock.urls')),
+    path('contact/', include('contact.urls')),
 ]

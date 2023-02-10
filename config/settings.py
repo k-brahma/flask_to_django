@@ -21,6 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-v6$4b$phvrw61@&%m-e405fllw1_5*l=a)z!@rry0gug8a2%o@'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'metal.apps.MetalConfig',
     'main.apps.MainConfig',
     'stock.apps.StockConfig',
+    'contact.apps.ContactConfig',
 ]
 
 MIDDLEWARE = [

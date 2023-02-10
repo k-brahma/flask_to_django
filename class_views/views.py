@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, RedirectView, ListView, DetailView
 
@@ -73,6 +75,10 @@ class RedirectSample3(RedirectView):
 class ItemListView1(ListView):
     model = Stock
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 class ItemListView2(ListView):
     model = Stock
@@ -101,6 +107,10 @@ class ItemListView4(ListView):
 
 class ItemDetailView1(DetailView):
     model = Stock
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class ItemDetailView2(DetailView):
