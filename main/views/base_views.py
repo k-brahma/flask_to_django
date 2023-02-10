@@ -21,7 +21,7 @@ class ReferenceView(View):
     """参考文献"""
 
     def get(self, request, *args, **kwargs):
-        readmd_str = Path(__file__).parent.parent.joinpath('templates', 'reference.md').read_text(encoding='utf-8')
+        readmd_str = Path(__file__).parent.parent.parent.joinpath('templates', 'reference.md').read_text(encoding='utf-8')
         note = markdown.markdown(readmd_str,
                                  extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code', ])
         context = {
