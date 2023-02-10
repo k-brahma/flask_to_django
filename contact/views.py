@@ -129,11 +129,11 @@ class ContactFormView(FormView):
 
 class FileFormView(FormView):
     """
-    ファイルを受け取るViewでは、formでenctype="multipart/form-data"を指定する必要がある。
+    ファイルを受け取るViewでは、 form タグの属性として、 enctype="multipart/form-data" が指定されている必要がある。
         multipart: 複数パートがある
         formdata : フォームデータ
         では、「複数のバート」とは？
-            → request.POST, requst,FILES がある
+            → request.POST, request,FILES がある
     """
 
     template_name = 'contact/file_form.html'
