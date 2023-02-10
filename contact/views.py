@@ -155,8 +155,8 @@ class FileFormView(FormView):
 
         email = form.cleaned_data['email']
         send_mail(
-            'お問い合わせありがとうございます',
-            f'以下の問い合わせを受けつけました\n\n{form.cleaned_data["reason"]}',
+            'ファイルを受け取りました',
+            f'ファイルを受け取りました\n\nファイル名: {file_name}\n\n投稿した理由: {form.cleaned_data["reason"]}',
             'info@pc5bai.com',
             [email, ],
         )
