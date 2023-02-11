@@ -27,4 +27,8 @@ urlpatterns = [
 
     # ファイルアップロードのサンプル
     path('file/', views.FileFormView.as_view(), name='file'),
+
+    # csrf のサンプル
+    path('csrf/', views.CSRFSampleView.as_view(), name='csrf'),
+    path('csrf_script/', views.CSRFScriptSampleView.as_view(), name='csrf_script'),
 ]

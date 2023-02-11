@@ -242,3 +242,11 @@ class FileFormView(FormView):
     def form_invalid(self, form):
         messages.error(self.request, '入力内容にエラーがあります。')
         return super().form_invalid(form)
+
+
+class CSRFSampleView(TemplateView):
+    template_name = 'contact/csrf_sample.html'
+
+
+class CSRFScriptSampleView(TemplateView):
+    template_name = 'contact/csrf_script_sample.html'

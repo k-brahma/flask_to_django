@@ -1,0 +1,24 @@
+{% extends "contact/base.html" %}
+{% block content %}
+    <form action="https://flask.pc5bai.com/metal/buy/" method="POST">
+        <div class="field">
+            <label for="metal_type">金属:</label>
+            <input type="radio" name="metal_type" value="gold" id="gold">gold
+            <input type="radio" name="metal_type" value="platinum" id="platinum">platinum
+            <input type="radio" name="metal_type" value="silver" id="silver">silver
+        </div>
+        <div class="field">
+            <label for="weight">重さ:</label>
+            <input type="text" name="weight">
+        </div>
+        <div class="field">
+            <label for="email">連絡先メールアドレス:</label>
+            <input type="text" name="email" required="">
+        </div>
+        <div class="field">
+            <label for="name">お名前:</label>
+            <input type="text" name="name" required="">
+        </div>
+        <input type="submit" value="送信する">
+    </form>
+{% endblock %}

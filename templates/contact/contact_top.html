@@ -36,4 +36,11 @@
     <p>
         <a href="{% url 'contact:file' %}">ファイルアップロードのサンプル</a>
     </p>
+    <hr>
+    <p>
+        <a href="{% url 'contact:csrf' %}">csrf 対策がされていないページへのポスト</a>
+    </p>
+    <p>
+        <a href="{% url 'contact:csrf_script' %}">csrf 対策がされていないページへ勝手にポストされてしまう</a>
+    </p>
 {% endblock %}
