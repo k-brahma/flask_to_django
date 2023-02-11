@@ -1,30 +1,39 @@
 {% extends "contact/base.html" %}
 {% block content %}
     <p>
-        <a href="{% url 'contact:as_div' %}">as_div</a>
+        <a href="{% url 'contact:as_div' %}">as_div で出力</a>
     </p>
     <p>
-        <a href="{% url 'contact:as_p' %}">as_p</a>
+        <a href="{% url 'contact:as_p' %}">as_p で出力</a>
     </p>
     <p>
-        <a href="{% url 'contact:as_table' %}">as_table</a>
+        <a href="{% url 'contact:as_table' %}">as_table で出力</a>
     </p>
     <p>
-        <a href="{% url 'contact:as_ul' %}">as_ul</a>
+        <a href="{% url 'contact:as_ul' %}">as_ul で出力</a>
+    </p>
+    <hr>
+    <p>
+        <a href="{% url 'contact:each' %}">すべて個別に出力</a>
     </p>
     <p>
-        <a href="{% url 'contact:with_data' %}">with_data</a>
+        <a href="{% url 'contact:iter' %}">for 文で出力</a>
+    </p>
+    <hr>
+    <p>
+        <a href="{% url 'contact:with_data' %}">"bound" 状態で出力する場合</a>
     </p>
     <p>
-        <a href="{% url 'contact:post' %}">post</a>
+        <a href="{% url 'contact:post' %}">post メソッドを調べてみよう</a>
     </p>
     <p>
-        <a href="{% url 'contact:method' %}">method</a>
+        <a href="{% url 'contact:method' %}">post での具体的な処理の例</a>
     </p>
     <p>
-        <a href="{% url 'contact:form_view' %}">form view</a>
+        <a href="{% url 'contact:form_view' %}">form view を使ってみよう</a>
     </p>
+    <hr>
     <p>
-        <a href="{% url 'contact:file' %}">file upload view</a>
+        <a href="{% url 'contact:file' %}">ファイルアップロードのサンプル</a>
     </p>
 {% endblock %}

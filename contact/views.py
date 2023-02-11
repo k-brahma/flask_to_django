@@ -5,16 +5,24 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import TemplateView, FormView
 
 from contact.forms import ContactForm, FileForm
 
 
 class ContactTopView(TemplateView):
+    """
+    このアプリケーションのトップページです。
+    """
     template_name = 'contact/contact_top.html'
 
 
 class ContactFormAsParagraphView(TemplateView):
+    """
+    form.as_p() でform の HTML を出力します。
+    """
+
     template_name = 'contact/contact_form_as_paragraph.html'
 
     def get_context_data(self, **kwargs):
@@ -24,6 +32,9 @@ class ContactFormAsParagraphView(TemplateView):
 
 
 class ContactFormAsDivView(TemplateView):
+    """
+    form.as_div() でform の HTML を出力します。
+    """
     template_name = 'contact/contact_form_as_div.html'
 
     def get_context_data(self, **kwargs):
@@ -33,6 +44,10 @@ class ContactFormAsDivView(TemplateView):
 
 
 class ContactFormAsTableView(TemplateView):
+    """
+    form.as_table() でform の HTML を出力します。
+    """
+
     template_name = 'contact/contact_form_as_table.html'
 
     def get_context_data(self, **kwargs):
@@ -42,6 +57,10 @@ class ContactFormAsTableView(TemplateView):
 
 
 class ContactFormAsUnorderedListView(TemplateView):
+    """
+    form.as_ul() でform の HTML を出力します。
+    """
+
     template_name = 'contact/contact_form_as_unordered_list.html'
 
     def get_context_data(self, **kwargs):
@@ -50,19 +69,65 @@ class ContactFormAsUnorderedListView(TemplateView):
         return context
 
 
+class ContactFieldsEachView(TemplateView):
+    """
+    フォームのフィールドをテンプレート内で個別に出力します。
+    カスタマイズ性は高いですが、記述が増えます。
+    """
+
+    template_name = 'contact/contact_fields_each.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ContactForm()
+        return context
+
+
+class ContactFieldsIterateView(TemplateView):
+    """
+    フォームのフィールドを for 文で回して表示します。
+    """
+
+    template_name = 'contact/contact_fields.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ContactForm()
+        return context
+
+
 class ContactFormWithDataView(TemplateView):
-    template_name = 'contact/contact_form_as_paragraph.html'
+    """
+    is_bound 状態のフォームを表示します。
+    """
+
+    # template_name = 'contact/contact_form_as_paragraph.html'
+    template_name = 'contact/contact_fields.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        data = {'score': 50, 'name': 'John Doe', 'email': 'foo@bar.com', 'message': '良い本で感激しましたが、梱包が雑です。'}
+        data = {
+            'score': 50,
+            'name': 'John Doe',
+            'email': 'foo@bar.com',
+            'message': '良い本で感激しましたが、梱包のダンボールの角が少し凹んでいたので50点です。',
+            'dt': timezone.datetime(1997, 3, 5, 17, 29, 35),
+            'is_claim': True,
+            'contact_reason': '3',
+        }
         context['form'] = ContactForm(data=data)
         return context
 
 
 class ContactFormWithPost(TemplateView):
-    template_name = 'contact/contact_form_as_paragraph.html'
+    """
+    post リクエストでは、 request.POST でフォームのデータを取得できます。
+    (request.POST は 文字列型です)
+    """
+
+    # template_name = 'contact/contact_form_as_paragraph.html'
+    template_name = 'contact/contact_fields.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -77,7 +142,12 @@ class ContactFormWithPost(TemplateView):
 
 
 class ContactFormWithPostMethod(TemplateView):
-    template_name = 'contact/contact_form_as_paragraph.html'
+    """
+    この View では、 post メソッド内でフォームのデータを処理しています。
+    """
+
+    # template_name = 'contact/contact_form_as_paragraph.html'
+    template_name = 'contact/contact_fields.html'
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
@@ -106,7 +176,13 @@ class ContactFormWithPostMethod(TemplateView):
 
 
 class ContactFormView(FormView):
-    template_name = 'contact/contact_form_as_paragraph.html'
+    """
+    FormView には、 form_valid, form_invalid というメソッドがあります。
+    これらは、フォームのバリデーションが成功した場合、失敗した場合にそれぞれ呼び出されます。
+    """
+
+    # template_name = 'contact/contact_form_as_paragraph.html'
+    template_name = 'contact/contact_fields.html'
     form_class = ContactForm
     success_url = reverse_lazy('contact:top')
 
