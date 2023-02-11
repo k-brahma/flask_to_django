@@ -13,11 +13,16 @@ from django.forms import (
 from django.utils import timezone
 
 
+def validate_name(value):
+    if 'hoge' in value:
+        raise ValidationError('名前にhogeは使えません。')
+
+
 class ContactForm(forms.Form):
     """ 様々なタイプのフィールドを紹介します """
     score = IntegerField(label='スコア', min_value=0, max_value=100, help_text='0点から100点のどこですか。')
-    name = CharField(label='お名前', max_length=10, help_text='10文字以内で入力してください。')
-    email = EmailField(label='メールアドレス', help_text='必須ではありません', required=False)
+    name = CharField(label='お名前', max_length=10, help_text='10文字以内で入力してください。', validators=[validate_name])
+    email = EmailField(label='メールアドレス', help_text='必須ではありません', required=False, )
     message = CharField(label='メッセージ', widget=Textarea, help_text='言いたいことを思う存分書いてください。')
     dt = DateTimeField(label='日時', help_text='日時を入力してください。', initial='2023-02-12 09:15:12')
     is_claim = BooleanField(label='クレーム', required=False, help_text='クレームですか？')
