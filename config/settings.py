@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,11 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'accounts.apps.AccountsConfig',
+    'note.apps.NoteConfig',
     'metal.apps.MetalConfig',
     'main.apps.MainConfig',
     'stock.apps.StockConfig',
     'contact.apps.ContactConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +66,11 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'templates',
+            # BASE_DIR / 'templates' / 'allauth',
+            # os.path.join(BASE_DIR, 'templates', 'allauth'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +91,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db3.sqlite3',
+        'NAME': BASE_DIR / 'db4.sqlite3',
     }
 }
 
@@ -129,9 +139,24 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# allauth を使ったユーザ認証等の設定
+AUTH_USER_MODEL = 'accounts.CustomUser'
+SITE_ID = 1
+LOGIN_REDIRECT_URL = 'main:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
 # Logging #
 LOGGING = {
-    # 　バージョンは1で固定
+    # バージョンは1で固定
     'version': 1,
     # 既存のログ設定は無効化しない
     'disable_existing_loggers': False,
