@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        div.red-area {
+            background-color: red;
+        }
+
+        div.note-comment {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        div.message.warning {
+            background-color: red;
+        }
+
+        div.message.info {
+            background-color: lightgreen;
+        }
+
+        input.color-lightgreen {
+            background-color: #99ff99;
+        }
+
+    </style>
+</head>
+<body>
+{% if messages %}
+    <section class="message-area">
+        {% for message in messages %}
+            <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                <p class="message-text">{{ message }}</p>
+            </div>
+        {% endfor %}
+    </section>
+{% endif %}
+<div>
+    <p><a href="{% url 'note:index' %}">note ページの一覧に戻る</a></p>
+    <p><a href="{% url 'note:entry_create' %}">note を新規に投稿する</a></p>
+</div>
+{% block content %}
+{% endblock %}
+<hr>
+<footer>
+    <p><a href="{% url 'main:index' %}">サイトトップへ</a></p>
+</footer>
+</body>
+</html>

@@ -25,4 +25,5 @@ urlpatterns = [
     path('metal/', include('metal.urls')),
     path('stock/', include('stock.urls')),
     path('contact/', include('contact.urls')),
+    path('note/', include('note.urls')),
 ]

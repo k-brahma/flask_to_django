@@ -1,0 +1,27 @@
+{% extends "note/base.html" %}
+{% block content %}
+    <h1>note の削除</h1>
+    <p>以下の投稿を削除します</p>
+    <div class="entry-item">
+        <h2>{{ object.title }}</h2>
+        <p>
+            タグ:&nbsp;
+            {% for tag in object.tags.all %}
+                <span><a href="{% url 'note:tag' tag.slug %}">{{ tag }}</a>&nbsp;</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ object.user.email }} さんからの投稿です
+            {% if object.user == request.user %}
+                <a href="{% url 'note:entry_update' object.id %}">編集</a>
+                <a href="{% url 'note:entry_delete' object.id %}">削除</a>
+            {% endif %}
+        </p>
+        <p>{{ object.created_dt|date:'Y/m/d H:i' }}</p>
+        <p>{{ object.body|linebreaksbr }}</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">削除する</button>
+    </form>
+{% endblock %}

@@ -56,22 +56,20 @@ python manage.py runserver
 
 ## サンプルデータの投入
 
-1. 管理画面ログイン用のスーパーユーザーを作成
+fixture からデータをロード
 
 ```shell
-python manage.py createsuperuser
-```
-
-2. fixture からデータをロード
-
-```shell
+python manage.py loaddata fixtures/user.json
 python manage.py loaddata fixtures/metal_metal.json
 python manage.py loaddata fixtures/stock_stock.json
+python manage.py loaddata fixtures/note.json
 ```
 
 サンプルデータ投入が済んだら、以下のページ等で表示を確かめてください。  
+`http://127.0.0.1:8000/adnin/` (ユーザ名: admin@example.com, password: hogehoge でログインしてください)  
 `http://127.0.0.1:8000/metal/`  
 `http://127.0.0.1:8000/stock/`
+`http://127.0.0.1:8000/note/`
 
 ***
 
@@ -99,7 +97,9 @@ python manage.py loaddata fixtures/stock_stock.json
 > データベーステーブルの簡易バックアップを以下のコマンドで生成できます。
 >
 > ```shell
+> python manage.py dumpdata accounts --indent 2 --format json > fixtures/user.json
 > python manage.py dumpdata metal.metal --indent 2 --format json > fixtures/metal_metal.json
 > python manage.py dumpdata stock.stock --indent 2 --format json > fixtures/stock_stock.json
+> python manage.py dumpdata note --indent 2 --format json > fixtures/note.json
 > ```
 > windows環境で作成した場合は、テキストエディタ等で開いて UTF-8 (BOMなし) に変換してください。

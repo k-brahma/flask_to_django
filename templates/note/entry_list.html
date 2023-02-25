@@ -1,0 +1,22 @@
+{% extends "note/base.html" %}
+{% block content %}
+    {% if tag %}
+        <h1>{{ tag.name }} のタグがつけられた投稿一覧です。</h1>
+    {% else %}
+        <h1>投稿の一覧です。</h1>
+    {% endif %}
+    {% for object in object_list %}
+        <hr>
+        <div class="entry-item">
+            <h2>{{ object.title }}</h2>
+            <p>{{ object.created_dt|date:'Y/m/d H:i' }} {{ object.user.email }} さんからの投稿(コメント{{ object.comment_set.all.count }}件)</p>
+            <p>
+                タグ:&nbsp;
+                {% for tag in object.tags.all %}
+                    <span><a href="{% url 'note:tag' tag.slug %}">{{ tag }}</a>&nbsp;</span>
+                {% endfor %}
+            </p>
+            <p><a href="{{ object.get_absolute_url }}">表示する</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}

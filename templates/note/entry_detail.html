@@ -1,0 +1,37 @@
+{% extends "note/base.html" %}
+{% block content %}
+    <div class="entry-item">
+        <h2>{{ object.title }}</h2>
+        <p>
+            タグ:&nbsp;
+            {% for tag in object.tags.all %}
+                <span><a href="{% url 'note:tag' tag.slug %}">{{ tag }}</a>&nbsp;</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ object.user.email }} さんからの投稿です
+            {% if object.user == request.user %}
+                <a href="{% url 'note:entry_update' object.id %}">編集</a>
+                <a href="{% url 'note:entry_delete' object.id %}">削除</a>
+            {% endif %}
+        </p>
+        <p>{{ object.created_dt|date:'Y/m/d H:i' }}</p>
+        <p>{{ object.body|linebreaksbr }}</p>
+        <div class="note-comment">
+            {% for comment in object.comment_set.all %}
+                <div class="comment">
+                    <p>{{ comment.user.email }} さんからのコメントです</p>
+                    <p>{{ comment.created_dt|date:'Y/m/d H:i' }}</p>
+                    <p>{{ comment.body|linebreaksbr }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="コメントする">
+            </form>
+        </div>
+    </div>
+{% endblock %}

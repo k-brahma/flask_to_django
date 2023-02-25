@@ -1,0 +1,20 @@
+[
+{
+  "model": "accounts.customuser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$yv6S3hRRJ4tlj4Y1ElBzcN$2LDBbQNMlc/lMGlHVx5jUoV3ogysLy6nWp1KOXLJQMw=",
+    "last_login": "2023-02-25T14:46:10Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "花子",
+    "last_name": "田中",
+    "email": "admin@example.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-02-25T14:46:10Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

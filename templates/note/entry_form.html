@@ -1,0 +1,15 @@
+{% extends "note/base.html" %}
+{% block content %}
+    <h1>
+        {% if form.is_bound %}
+            note の更新
+        {% else %}
+            note の新規投稿
+        {% endif %}
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">送信する</button>
+    </form>
+{% endblock %}
