@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import resolve_url
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from note.forms import EntryForm, CommentForm
@@ -64,7 +65,7 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
         """
         方法1:
 
-        form.instance は、更新対象のモデルオブジェクト
+        form.instance は、新規登録されるモデルオブジェクト
         これの属性を編集してから save する
         """
         form.instance.user = self.request.user
@@ -75,7 +76,7 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
     #     """
     #     方法2:
     #
-    #     form.save(commit=False) で、更新対象のモデルオブジェクトを取得
+    #     form.save(commit=False) で、新規登録されるモデルオブジェクトを取得
     #     この場合は、many-to-many のデータは、別途保存し直す必要がある。
     #     """
     #     instance = form.save(commit=False)
@@ -108,6 +109,7 @@ class EntryUpdateView(LoginRequiredMixin, UpdateView):
         これの属性を編集してから save する
         """
         form.instance.user = self.request.user
+        form.instance.updated_at = timezone.now()
         messages.info(self.request, '投稿を更新しました')
         return super().form_valid(form)
 
@@ -119,7 +121,9 @@ class EntryUpdateView(LoginRequiredMixin, UpdateView):
     #     この場合は、many-to-many のデータは、別途保存し直す必要がある。
     #     """
     #     instance = form.save(commit=False)
+    #
     #     instance.user = self.request.user
+    #     instance.updated_at = timezone.now()
     #     instance.save()
     #     form.save_m2m()
     #     messages.info(self.request, '投稿を更新しました')

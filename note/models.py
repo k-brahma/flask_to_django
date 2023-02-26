@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Tag(models.Model):
@@ -16,7 +17,7 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.id}: {self.name}'
 
 
 class Entry(models.Model):
@@ -26,6 +27,10 @@ class Entry(models.Model):
     tags は ManyToManyField なので、複数のタグをつけられるし、ひとつもなくても良い。
     settings.AUTH_USER_MODEL は、settings.py で定義したユーザーモデルを指す。
     AbstractBaseUser クラスを継承したユーザモデルは、この方法で指定する。
+
+
+    created_dt, updated_dt については、フィールドの定義を Comment モデルとは違う書き方にした。
+    これは、自動的に設定されて変更できないことを嫌い、自分で更新用コードを書きたいときの設定法。
     """
 
     class Meta:
@@ -38,8 +43,11 @@ class Entry(models.Model):
     title = models.CharField(max_length=20, verbose_name='タイトル')
     body = models.TextField(verbose_name='投稿本文')
 
-    created_dt = models.DateTimeField(auto_now_add=True)
-    updated_dt = models.DateTimeField(auto_now=True)
+    created_dt = models.DateTimeField(default=timezone.now)  # auto_now_add=True
+    updated_dt = models.DateTimeField(default=timezone.now)  # auto_now=True
+
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         """
@@ -68,3 +76,6 @@ class Comment(models.Model):
 
     created_dt = models.DateTimeField(auto_now_add=True)
     updated_dt = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.body[:10]  # コメント本文の先頭10文字文だけを出力
