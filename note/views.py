@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import resolve_url
+from django.shortcuts import resolve_url, redirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -34,15 +34,18 @@ class EntryDetailView(DetailView):
         return Entry.objects.all().select_related('user', ).prefetch_related('tags', 'comment_set', )
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
         form = CommentForm(request.POST)
         if form.is_valid():
+            self.object = self.get_object()
             comment = form.save(commit=False)
             comment.entry = self.object
-            comment.user = self.request.user
+            comment.user = self.request.user  # 要ログイン。ログインユーザ以外によるコメントはここで 500 エラーになる
             comment.save()
             messages.info(self.request, 'コメントしました')
-        return self.get(request, *args, **kwargs)
+            return redirect(self.request.path)
+        else:
+            messages.info(self.request, 'コメント投稿に失敗しました')
+            return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
