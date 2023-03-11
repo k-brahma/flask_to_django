@@ -31,15 +31,22 @@ def delete_create_update_tags():
     # models.Model クラスのインスタンスを初期化。
     # その後、save() メソッドで保存する
     tag2 = Tag(name='ジャンゴ', slug='django')
-    print(tag2.id, tag2.name, tag2.slug)  # None, ジャンゴ, djangos
+    print(tag2.id, tag2.name, tag2.slug)  # None, ジャンゴ, django
 
     tag2.save()
     print(tag2.id, tag2.name, tag2.slug)  # 数値, ジャンゴ, django
 
-    tag1.name = 'エクセルVBA'
-    tag1.slug = 'excel-vba'
-    tag1.save()
-    print(tag1.id, tag1.name, tag1.slug)  # 数値, エクセルVBA, excel-vba
+    try:
+        exvba_tag = Tag.objects.get(slug='pythonnnn')  # getは必ずあるという前提で使う。見つからないと例外が発生する
+    except Tag.DoesNotExist as e:
+        print('タグが見つからなかった場合はこの例外が発生する')
+        raise e
+
+    exvba_tag.name = 'エクセルVBA'
+    exvba_tag.slug = 'excel-vba'
+    exvba_tag.save()
+    print(exvba_tag.id, exvba_tag.name, exvba_tag.slug)  # 数値, エクセルVBA, excel-vba
+    print(tag1.id, tag1.name, tag1.slug)  # 変数 tag1 の中身は更新されていないので注意！
 
     tags = Tag.objects.all()
     print(tags.count())  # 2

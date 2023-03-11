@@ -25,7 +25,11 @@ def delete_create_update_entries():
     Tag.objects.all().delete()
     Entry.objects.all().delete()
 
-    user = get_user_model().objects.first()
+    users = get_user_model().objects.filter(is_staff=True)
+    if users.exists():
+        user = users[0]
+    else:
+        raise Exception('該当するユーザが見つかりません')
 
     # Tag オブジェクトを5つ作る
     tag1 = Tag.objects.create(id=1, name='パイソン', slug='python')

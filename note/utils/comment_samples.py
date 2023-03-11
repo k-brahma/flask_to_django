@@ -28,7 +28,7 @@ def delete_create_update_comments():
     entries = Entry.objects.all()
     print(entries.count())  # 既存インスタンスの数
 
-    Entry.objects.all().delete()
+    Entry.objects.all().delete()  # on_delete=models.CASCADE なので Comment オブジェクトも削除される
 
     comments = Comment.objects.all()
     print(comments.count())  # 0
@@ -36,7 +36,7 @@ def delete_create_update_comments():
     entries = Entry.objects.all()
     print(entries.count())  # 0
 
-    user = get_user_model().objects.first()
+    user = get_user_model().objects.first()  # てっとり早くひとつ取得したいときに使う
 
     # Entry オブジェクトを2つ作る
     entry1 = Entry.objects.create(user=user, title='タイトル1', body='本文1')
