@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import resolve_url, render, redirect
 from django.views import View
-from django.views.generic import ListView, CreateView, RedirectView
+from django.views.generic import CreateView, RedirectView, TemplateView, ListView
 
 from stock.forms import StockPurchaseForm
 from stock.models import Stock, StockPurchase
@@ -22,6 +22,15 @@ class StockPurchaseList(View):
 class StockTopView(ListView):
     model = Stock
     template_name = 'stock/index.html'
+
+# class StockTopView(TemplateView):
+#     model = Stock
+#     template_name = 'stock/index.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['object_list'] = Stock.objects.all()
+#         return context
 
 
 def stock_detail(request, pk):
