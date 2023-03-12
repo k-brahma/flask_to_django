@@ -48,6 +48,9 @@ def delete_create_update_tags():
     print(exvba_tag.id, exvba_tag.name, exvba_tag.slug)  # 数値, エクセルVBA, excel-vba
     print(tag1.id, tag1.name, tag1.slug)  # 変数 tag1 の中身は更新されていないので注意！
 
+    tag1.refresh_from_db()
+    print(tag1.id, tag1.name, tag1.slug)  # 変数 tag1 の中身は更新されていないので注意！
+
     tags = Tag.objects.all()
     print(tags.count())  # 2
 
