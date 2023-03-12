@@ -9,7 +9,8 @@
         <hr>
         <div class="entry-item">
             <h2>{{ object.title }}</h2>
-            <p>{{ object.created_dt|date:'Y/m/d H:i' }} {{ object.user.email }} さんからの投稿(コメント{{ object.comment_set.all.count }}件)</p>
+            <p>{{ object.created_dt|date:'Y/m/d H:i' }} {{ object.user.email }} さんからの投稿</p>
+            <p>(コメント{{ object.comment_set.all.count }}件)</p>
             <p>
                 タグ:&nbsp;
                 {% for tag in object.tags.all %}
