@@ -11,11 +11,11 @@ from note.models import Entry, Tag
 class EntryListView(ListView):
     model = Entry
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated:
-    #         return redirect(resolve_url('login') + '?next=' + request.path)
-    #     return super().dispatch(request, *args, **kwargs)
-    #
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(resolve_url('login') + '?next=' + request.path)
+        return super().dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
         return Entry.objects.all().select_related('user', ).prefetch_related('tags', 'comment_set', )
 
