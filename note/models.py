@@ -34,7 +34,7 @@ class Entry(models.Model):
     """
 
     class Meta:
-        ordering = ('created_dt',)
+        ordering = ('-created_dt',)
         verbose_name_plural = 'Entries'
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
