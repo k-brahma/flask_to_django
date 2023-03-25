@@ -26,6 +26,47 @@
             background-color: #99ff99;
         }
 
+        section.page-controls {
+            margin: 10px;
+            padding: 10px;
+            background-color: darkseagreen;
+        }
+
+        section.entry-list {
+            margin: 10px;
+            padding: 10px;
+            background-color: lightblue;
+        }
+
+        div.note {
+            border-bottom: blue solid 1px;
+        }
+
+        div.note.odd {
+            background-color: palegreen;
+        }
+
+        div.note.even {
+            background-color: yellowgreen;
+        }
+
+        div.comment {
+            border-bottom: blue solid 1px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        div.entry {
+            border-bottom: blue solid 1px;
+            margin: 10px;
+            padding: 10px;
+        }
+        div.entry-comment{
+            border-bottom: blue dashed 1px;
+            margin: 10px;
+            padding: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -40,7 +81,11 @@
 {% endif %}
 <div>
     <p><a href="{% url 'note:index' %}">note ページの一覧に戻る</a></p>
-    <p><a href="{% url 'note:entry_create' %}">note を新規に投稿する</a></p>
+    <p>
+        <a href="{% url 'note:entry_create_view' %}">note を新規に投稿する(View)</a><br>
+        <a href="{% url 'note:entry_create_formview' %}">note を新規に投稿する(FormView)</a><br>
+        <a href="{% url 'note:entry_create' %}">note を新規に投稿する(CreateView)</a><br>
+    </p>
 </div>
 {% block content %}
 {% endblock %}

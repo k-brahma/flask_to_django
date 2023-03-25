@@ -1,0 +1,48 @@
+{% extends "note/base.html" %}
+{% block content %}
+    <section class="section" id="form-area">
+        <!-- tag でフィルターする input form を用意する -->
+        <form action="" method="get">
+            <input type="text" name="tag" value="{{ tag }}"/>
+            <input type="submit" value="Filter"/>
+        </form>
+    </section>
+
+    <section class="section page-controls" id="header">
+        <!-- pagination のコントロールを表示する (elided) -->
+        {% for page in paginator_range_header %}
+            {% if page_obj.number == page %}
+                <span>{{ page }}</span>
+            {% elif page == paginator.ELLIPSIS %}
+                <span>{{ page }}</span>
+            {% else %}
+                <a href="?page={{ page }}&tag={{ tag }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </section>
+    <section class="section entry-list" id="entry-list">
+        <!-- リストを出力する。奇数行、偶数行でスタイルを変える -->
+        {% for entry in object_list %}
+            <div class="note {% cycle 'odd' 'even' %}">
+                <h2><a href="{% url 'note:entry_detail' entry.id %}">{{ entry.title }}</a></h2>
+                <p>{{ entry.content }}</p>
+                <p>{{ entry.created_at }}</p>
+                <p>{{ entry.updated_at }}</p>
+                <p>{{ entry.tags.all|join:", " }}</p>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section class="section page-controls" id="footer">
+        <!-- pagination のコントロールを表示する (elided) -->
+        {% for page in paginator_range_footer %}
+            {% if page_obj.number == page %}
+                <span>{{ page }}</span>
+            {% elif page == paginator.ELLIPSIS %}
+                <span>{{ page }}</span>
+            {% else %}
+                <a href="?page={{ page }}&tag={{ tag }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </section>
+{% endblock %}

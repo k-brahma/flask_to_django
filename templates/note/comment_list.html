@@ -1,0 +1,22 @@
+{% extends "note/base.html" %}
+{% block content %}
+    {% for comment in object_list %}
+        <div class="comment">
+            <div class="comment-header">
+                <div class="comment-entry-title">
+                    {{ comment.entry.title }} に対するコメントです<br>
+                    {{ comment.entry.user }} さんは、お返事してくださいね！<br>
+                </div>
+                <div class="comment-author">
+                    {{ comment.user }}さんからのコメントです
+                </div>
+                <div class="comment-date">
+                    {{ comment.created_dt|date:"Y-m-d H:i" }}
+                </div>
+            </div>
+            <div class="comment-body">
+                {{ comment.body|linebreaksbr }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

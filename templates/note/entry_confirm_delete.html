@@ -12,10 +12,6 @@
         </p>
         <p>
             {{ object.user.email }} さんからの投稿です
-            {% if object.user == request.user %}
-                <a href="{% url 'note:entry_update' object.id %}">編集</a>
-                <a href="{% url 'note:entry_delete' object.id %}">削除</a>
-            {% endif %}
         </p>
         <p>{{ object.created_dt|date:'Y/m/d H:i' }}</p>
         <p>{{ object.body|linebreaksbr }}</p>

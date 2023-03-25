@@ -1,0 +1,64 @@
+{% extends "note/base.html" %}
+{% block content %}
+    <section class="section" id="form-area">
+        <!-- tag でフィルターする input form を用意する -->
+        <form action="" method="get">
+            <input type="text" name="tag" value="{{ tag }}"/>
+            <input type="submit" value="Filter"/>
+        </form>
+    </section>
+
+    <section class="section page-controls" id="header">
+        <!-- pagination のコントロールを表示する -->
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&tag={{ tag }}">Previous</a>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span>{{ i }}</span>
+            {% else %}
+                <a href="?page={{ i }}&tag={{ tag }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&tag={{ tag }}">Next</a>
+        {% endif %}
+    </section>
+
+    <section class="section entry-list" id="entry-list">
+        <!--
+            paginate されたリストを表示する Django の paginator を使う。
+            tag=tag とすることで、tag でフィルターされたリストを表示する。
+         -->
+        {% for entry in object_list %}
+            <div class="note">
+                <h2><a href="{% url 'note:entry_detail' entry.id %}">{{ entry.title }}</a></h2>
+                <p>{{ entry.content }}</p>
+                <p>{{ entry.created_at }}</p>
+                <p>{{ entry.updated_at }}</p>
+                <p>{{ entry.tags.all|join:", " }}</p>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section class="section page-controls" id="footer">
+        <!-- pagination のコントロールを表示する -->
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&tag={{ tag }}">Previous</a>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span>{{ i }}</span>
+            {% else %}
+                <a href="?page={{ i }}&tag={{ tag }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&tag={{ tag }}">Next</a>
+        {% endif %}
+    </section>
+{% endblock %}

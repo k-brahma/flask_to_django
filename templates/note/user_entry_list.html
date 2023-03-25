@@ -1,0 +1,45 @@
+{% extends "note/base.html" %}
+{% block content %}
+    {% for entry in object_list %}
+        <div class="entry">
+            <div class="entry-header">
+                <div class="entry-tags">
+                    {% for tag in entry.tags.all %}
+                        <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                <div class="entry-title">
+                    <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a><br>
+                    {{ entry.user }} さんの投稿です。
+                </div>
+                <div class="entry-date">
+                    {{ entry.created_dt|date:"Y-m-d" }}
+                </div>
+            </div>
+            <div class="entry-body">
+                {{ entry.body|linebreaksbr }}
+            </div>
+            <div class="comment-list">
+                {% for comment in entry.comment_set.all %}
+                    <div class="entry-comment">
+                        <div class="comment-header">
+                            <div class="comment-entry-title">
+                                {{ comment.entry.title }} に対するコメントです<br>
+                                {{ comment.entry.user }} さんは、お返事してくださいね！<br>
+                            </div>
+                            <div class="comment-author">
+                                {{ comment.user }}さんからのコメントです
+                            </div>
+                            <div class="comment-date">
+                                {{ comment.created_dt|date:"Y-m-d H:i" }}
+                            </div>
+                        </div>
+                        <div class="comment-body">
+                            {{ comment.body|linebreaksbr }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

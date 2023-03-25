@@ -11,8 +11,16 @@
         <p>
             {{ object.user.email }} さんからの投稿です
             {% if object.user == request.user %}
-                <a href="{% url 'note:entry_update' object.id %}">編集</a>
-                <a href="{% url 'note:entry_delete' object.id %}">削除</a>
+                <p>
+                    <a href="{% url 'note:entry_update_view' object.id %}">編集(View)</a><br>
+                    <a href="{% url 'note:entry_update_formview' object.id %}">編集(FormView)</a><br>
+                    <a href="{% url 'note:entry_update' object.id %}">編集(UpdateView)</a><br>
+                </p>
+                <p>
+                    <a href="{% url 'note:entry_delete_view' object.id %}">削除(View)</a><br>
+                    削除(FormView) - このViewはありません<br>
+                    <a href="{% url 'note:entry_delete' object.id %}">削除(DeleteView)</a>
+                </p>
             {% endif %}
         </p>
         <p>{{ object.created_dt|date:'Y/m/d H:i' }}</p>

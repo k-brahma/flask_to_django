@@ -4,7 +4,11 @@ from note.models import Entry, Comment
 
 
 class EntryForm(forms.ModelForm):
-    confirm = forms.BooleanField(label='利用規約に同意します', required=True)  # モデルにないフィールド
+    confirm = forms.BooleanField(  # モデルにないフィールド
+        label='利用規約に同意します',
+        required=True,
+        error_messages={'required': '利用規約に同意してもらえないと受け付けられません', }
+    )
 
     class Meta:
         model = Entry
@@ -12,7 +16,7 @@ class EntryForm(forms.ModelForm):
 
         widgets = {  # 出力される HTML をカスタマイズ
             'title': forms.TextInput(attrs={'size': 80, 'placeholder': 'タイトルを入力してください', 'class': 'color-lightgreen'}),
-            'body': forms.Textarea(attrs={'cols': 80, 'rows': 40, 'placeholder': '何文字書いてもらっても構いません'}),
+            'body': forms.Textarea(attrs={'cols': 80, 'rows': 15, 'placeholder': '何文字書いてもらっても構いません'}),
         }
 
         labels = {  # 出力される HTML のラベル部分をカスタマイズ
