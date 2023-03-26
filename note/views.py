@@ -27,7 +27,8 @@ class CommentListView(ListView):
     template_name = 'note/comment_list.html'
 
     def get_queryset(self):
-        return Comment.objects.all().select_related('user', 'entry', 'entry__user', )
+        # 以下では、 entry__user を取得しているので、 entry は取得しなくてよい。(select_related の性質)
+        return Comment.objects.all().select_related('user', 'entry__user', ).prefetch_related('entry__tags', )
 
 
 class UserEntryListView(ListView):
@@ -111,7 +112,8 @@ class EntryDetailView(DetailView):
     model = Entry
 
     def get_queryset(self):
-        return Entry.objects.all().select_related('user', ).prefetch_related('tags', 'comment_set', )
+        return Entry.objects.all().select_related('user', ).prefetch_related('tags', 'comment_set',
+                                                                             'comment_set__user', )
 
     def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
