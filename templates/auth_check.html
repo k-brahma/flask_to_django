@@ -1,0 +1,5 @@
+{% if request.user.is_authenticated %}
+    あなたはログインしているユーザで、あなたのユーザ名は {{ request.user.username }} です。
+{% else %}
+    あなたはログインしていないユーザです。
+{% endif %}

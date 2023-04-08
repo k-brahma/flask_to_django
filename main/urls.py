@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import resolve_url
 from django.urls import path
+from django.views.generic import TemplateView
 
 from main.views import base_views, sample_views, class_based_views, as_view_samples, error_views
 
@@ -74,4 +75,6 @@ urlpatterns = [
     path('raise_400/', error_views.raise_400, name='raise_400'),
 
     path('raise_500/', error_views.raise_500, name='raise_500'),
+
+    path('auth_check/', TemplateView.as_view(template_name='auth_check.html'), name='authed'),
 ]
