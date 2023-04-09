@@ -237,7 +237,9 @@ class FileFormView(FormView):
             [email, ],
         )
         messages.info(self.request, 'ファイルを受け取りました。')
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        response.set_cookie('hoge', 'fuga')
+        return response
 
     def form_invalid(self, form):
         messages.error(self.request, '入力内容にエラーがあります。')
